@@ -64,14 +64,17 @@ a {
 }
 
 
-/* =========================================================
-   INTRO
-   ========================================================= */
+/* =========================
+   INTRO SCREEN
+========================= */
 
 .intro-screen {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 99999;
+
+    width: 100%;
+    height: 100dvh;
 
     background: #000;
 
@@ -81,16 +84,14 @@ a {
 
     overflow: hidden;
 
+    opacity: 1;
+    visibility: visible;
+
     transition:
         opacity 0.8s ease,
         visibility 0.8s ease,
-        transform 1s cubic-bezier(.7,0,.2,1);
-}
-
-.intro-screen.hide {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.08);
+        transform 1s cubic-bezier(.7, 0, .2, 1),
+        filter 0.8s ease;
 }
 
 .intro-video {
@@ -98,6 +99,8 @@ a {
     height: 100%;
 
     object-fit: cover;
+
+    display: block;
 }
 
 .intro-overlay {
@@ -109,16 +112,26 @@ a {
     background:
         radial-gradient(
             circle at center,
-            transparent 20%,
-            rgba(0,0,0,0.35) 70%,
-            rgba(0,0,0,0.85)
+            transparent 15%,
+            rgba(0,0,0,.25) 60%,
+            rgba(0,0,0,.9) 100%
         );
 }
 
 
-/* =========================================================
+/* INTRO EXIT */
+
+.intro-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.08);
+    filter: blur(10px);
+}
+
+
+/* =========================
    MAIN WEBSITE
-   ========================================================= */
+========================= */
 
 .main-website {
     min-height: 100vh;
@@ -130,6 +143,28 @@ a {
             transparent 45%
         ),
         #070707;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.9s ease,
+        visibility 0.9s ease;
+}
+
+
+/* JS adds this AFTER intro */
+
+.main-website.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Prevent scrolling while intro is playing */
+
+body.intro-active {
+    overflow: hidden;
 }
 
 
