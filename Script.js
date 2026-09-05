@@ -1,30 +1,47 @@
-
-// Intro Screen Handler
-const video = document.getElementById('intro-video');
-const introScreen = document.getElementById('intro-screen');
-const mainContent = document.getElementById('main-content');
+let introFinished = false;
 
 function endIntro() {
-  introScreen.style.opacity = '0';
-  introScreen.style.transform = 'scale(1.03)';
-  setTimeout(() => {
-    introScreen.classList.add('hidden');
-    mainContent.classList.remove('hidden');
-  }, 650);
+  if (introFinished) return;
+  introFinished = true;
+
+  const introScreen = document.getElementById('intro-screen');
+  const mainContent = document.getElementById('main-content');
+
+  if (mainContent) {
+    mainContent.style.display = 'block';
+  }
+
+  if (introScreen) {
+    introScreen.style.opacity = '0';
+    introScreen.style.pointerEvents = 'none';
+    setTimeout(() => {
+      introScreen.style.display = 'none';
+    }, 600);
+  }
 }
 
-// Check if video is playable, warna 3.5s me auto transition
-if (video) {
-  video.onended = endIntro;
-}
-setTimeout(endIntro, 3500);
+// Page load hote hi timers setup karo
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('intro-video');
+
+  if (video) {
+    video.onended = endIntro;
+    video.onerror = () => {
+      // Video na mile toh auto transition
+      setTimeout(endIntro, 3000);
+    };
+  }
+
+  // Backup fallback: 3.5 seconds mein apne aap home page aayega
+  setTimeout(endIntro, 3500);
+});
 
 // Tab Switcher (Insta / FB / YouTube)
 function switchTab(platform, element) {
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
 
-  element.classList.add('active');
+  if (element) element.classList.add('active');
   const target = document.getElementById(`${platform}-panel`);
   if (target) {
     target.classList.add('active');
@@ -37,13 +54,13 @@ function switchYtFilter(filter, element) {
   const videos = document.getElementById('yt-videos-container');
 
   document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
-  element.classList.add('active');
+  if (element) element.classList.add('active');
 
   if (filter === 'shorts') {
-    shorts.classList.remove('hidden');
-    videos.classList.add('hidden');
+    if (shorts) shorts.style.display = 'grid';
+    if (videos) videos.style.display = 'none';
   } else {
-    shorts.classList.add('hidden');
-    videos.classList.remove('hidden');
+    if (shorts) shorts.style.display = 'none';
+    if (videos) videos.style.display = 'grid';
   }
 }
