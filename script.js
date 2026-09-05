@@ -1,4 +1,3 @@
-alert("F NEWS JS LOADED");
 document.addEventListener("DOMContentLoaded", () => {
 
     const intro = document.getElementById("intro");
