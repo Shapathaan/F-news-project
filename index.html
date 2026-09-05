@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F NEWS | Bollywood & Paparazzi Buzz</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Intro Screen (Video ready hone par chalega, tab tak logo placeholder) -->
+  <div id="intro-screen">
+    <video id="intro-video" playsinline muted autoplay>
+      <source src="assets/intro.mp4" type="video/mp4" />
+    </video>
+    <div id="intro-fallback" class="intro-fallback">
+      <img src="assets/logo.png" alt="F NEWS" class="fallback-logo" />
+      <p class="tagline">BOLLYWOOD • PAPARAZZI • BREAKING</p>
+    </div>
+    <button id="skip-btn" onclick="endIntro()">Skip &gt;&gt;</button>
+  </div>
+
+  <!-- Main Website Content -->
+  <div id="main-content" class="hidden">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo-brand">
+        <img src="assets/logo.jpg" alt="F NEWS Logo" class="nav-logo" />
+        <span class="logo-text"><span>F</span> NEWS</span>
+      </div>
+      <nav>
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About Us</a>
+        <a href="#contact" class="nav-link">Contact Us</a>
+        <a href="#pr" class="nav-link pr-btn">PR Enquiry</a>
+      </nav>
+    </header>
+
+    <!-- Home: Social Media Hub -->
+    <section id="home" class="section">
+      <div class="channel-tabs">
+        <button class="tab-btn active" onclick="switchTab('insta', this)">
+          <i class="fab fa-instagram"></i> Instagram
+        </button>
+        <button class="tab-btn" onclick="switchTab('fb', this)">
+          <i class="fab fa-facebook"></i> Facebook
+        </button>
+        <button class="tab-btn" onclick="switchTab('yt', this)">
+          <i class="fab fa-youtube"></i> YouTube
+        </button>
+      </div>
+
+      <!-- Instagram Panel -->
+      <div id="insta-panel" class="tab-panel active">
+        <div class="panel-header">
+          <h3><i class="fab fa-instagram"></i> Trending Paparazzi Reels</h3>
+        </div>
+        <div class="feed-grid">
+          <div class="feed-card">
+            <!-- Replace reel embed url -->
+            <iframe src="https://www.instagram.com/reel/embed" frameborder="0" scrolling="no"></iframe>
+            <div class="action-bar">
+              <a href="https://instagram.com" target="_blank" class="action-btn"><i class="far fa-heart"></i> Like on Insta</a>
+              <a href="https://instagram.com" target="_blank" class="action-btn"><i class="far fa-comment"></i> Comment</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facebook Panel -->
+      <div id="fb-panel" class="tab-panel">
+        <div class="panel-header">
+          <h3><i class="fab fa-facebook"></i> Viral Facebook Clips</h3>
+        </div>
+        <div class="feed-grid">
+          <div class="feed-card">
+            <iframe src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/facebook/videos/10153231379946729/&show_text=false" frameborder="0" allowfullscreen></iframe>
+            <div class="action-bar">
+              <a href="https://facebook.com" target="_blank" class="action-btn"><i class="far fa-thumbs-up"></i> React on FB</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- YouTube Panel -->
+      <div id="yt-panel" class="tab-panel">
+        <div class="yt-filter-bar">
+          <button class="sub-tab-btn active" onclick="switchYtFilter('shorts', this)">Shorts</button>
+          <button class="sub-tab-btn" onclick="switchYtFilter('videos', this)">Full Videos</button>
+        </div>
+
+        <div id="yt-shorts-container" class="feed-grid shorts-grid">
+          <div class="feed-card short-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Short" frameborder="0" allowfullscreen></iframe>
+            <div class="action-bar">
+              <a href="https://youtube.com" target="_blank" class="action-btn"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <div id="yt-videos-container" class="feed-grid hidden">
+          <div class="feed-card video-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video" frameborder="0" allowfullscreen></iframe>
+            <div class="action-bar">
+              <a href="https://youtube.com" target="_blank" class="action-btn"><i class="fab fa-youtube"></i> View & Comment</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section">
+      <div class="content-card">
+        <h2>About F NEWS</h2>
+        <p>F NEWS is your exclusive digital destination for Mumbai celebrity spotting, airport looks, red carpet coverage, and instant paparazzi updates from B-Town.</p>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="section">
+      <div class="content-card">
+        <h2>Contact Us</h2>
+        <p class="section-sub">Have a tip or want to connect with our media desk?</p>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="form-box">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea name="message" rows="4" placeholder="Your Message / Tip" required></textarea>
+          <button type="submit" class="primary-btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PR Enquiry Section -->
+    <section id="pr" class="section">
+      <div class="content-card highlight-card">
+        <h2>Celebrity PR & Brand Enquiries</h2>
+        <p class="section-sub">Airport paparazzi spotting, trailer launches, brand shoots, and event coverage.</p>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="form-box">
+          <input type="text" name="agency" placeholder="Agency or Brand Name" required />
+          <input type="text" name="contact_person" placeholder="Contact Person" required />
+          <input type="tel" name="phone" placeholder="WhatsApp / Mobile Number" required />
+          <textarea name="event_details" rows="4" placeholder="Event Date, Location, Celeb Details" required></textarea>
+          <button type="submit" class="gold-btn">Submit PR Request</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 F NEWS Media. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
